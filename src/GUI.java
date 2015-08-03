@@ -31,35 +31,35 @@ import javax.swing.SwingConstants;
 @SuppressWarnings("serial")
 public class GUI extends JFrame implements ActionListener, ItemListener
 {			
-	private JLabel text1 = new JLabel("Choose a file.",SwingConstants.CENTER);
+	private JLabel text1 = new JLabel("Wähle eine Datei.",SwingConstants.CENTER);
 	private final JFileChooser fileselect = new JFileChooser();
 
-	private JMenu menu = new JMenu("Wii Options");
-	private JCheckBoxMenuItem cbMenuItem = new JCheckBoxMenuItem("Auto-Locate");
+	private JMenu menu = new JMenu("Wii-Optionen");
+	private JCheckBoxMenuItem cbMenuItem = new JCheckBoxMenuItem("Automatische Erfassung");
 
-	private JMenuItem menuItem = new JMenuItem("Change Port",
+	private JMenuItem menuItem = new JMenuItem("Port ändern",
 			KeyEvent.VK_T);
-	private JMenuItem menuItem2 = new JMenuItem("Set Arguments",
+	private JMenuItem menuItem2 = new JMenuItem("Argumente setzen",
 			KeyEvent.VK_T);
-	private JMenuItem h1 = new JMenuItem("Reset Defaults");
-	private JMenuItem h2 = new JMenuItem("Online Help");
-	private JMenuItem h3 = new JMenuItem("About");	
+	private JMenuItem h1 = new JMenuItem("Standards wiederherstellen");
+	private JMenuItem h2 = new JMenuItem("Online-Hilfe");
+	private JMenuItem h3 = new JMenuItem("Über");	
 
-	private JMenuItem browse = new JMenuItem("Open...");
-	private JButton send = new JButton("   Send   ");
-	private JButton button5= new JButton("Browse...");
+	private JMenuItem browse = new JMenuItem("Öffnen...");
+	private JButton send = new JButton("   Senden   ");
+	private JButton button5= new JButton("Durchsuchen...");
 
-	static JLabel filename = new JLabel("No file selected...",SwingConstants.LEFT);
+	static JLabel filename = new JLabel("Keine Datei ausgewählt...",SwingConstants.LEFT);
 	static TextField wiiip = new TextField("xxx.xxx.x.x");
 
 	public GUI()
 	{
-		JMenu help = new JMenu("Help");
+		JMenu help = new JMenu("Hilfe");
 
 		JFrame frame = new JFrame("jWiiload");
 
 		JMenuBar menuBar = new JMenuBar();
-		JMenu file = new JMenu("File");
+		JMenu file = new JMenu("Datei");
 
 
 
@@ -201,15 +201,15 @@ public class GUI extends JFrame implements ActionListener, ItemListener
 
 	public int showLost()
 	{
-		String[] selections = {"Retry","Stop"};
-		return JOptionPane.showOptionDialog(this,"No Wii found.\nIs the Homebrew Channel running?","Error",JOptionPane.ERROR_MESSAGE, 0, null,selections,null);
+		String[] selections = {"Wiederholen","Stopp"};
+		return JOptionPane.showOptionDialog(this,"Keine Wii gefunden.\nLäuft der Homebrewkanal?","Fehler",JOptionPane.ERROR_MESSAGE, 0, null,selections,null);
 
 	}
 
 	public int showRate()
 	{
-		String[] selections = {"Retry","Stop"};
-		return JOptionPane.showOptionDialog(this,"Rate Limit Exceeded.\nPlease wait a little while, then try again.","Error", JOptionPane.ERROR_MESSAGE, 0, null, selections, null);
+		String[] selections = {"Wiederholen","Stopp"};
+		return JOptionPane.showOptionDialog(this,"Rate Limit überschritten.\nBitte warte etwas und versuche es dann noch einmal.","Fehler", JOptionPane.ERROR_MESSAGE, 0, null, selections, null);
 	}
 
 	@Override
@@ -229,14 +229,14 @@ public class GUI extends JFrame implements ActionListener, ItemListener
 			goOnline("http://code.google.com/p/jwiiload/");
 		else if (e.getSource() == h3)
 		{
-			String[] selections = {"Visit Site","Close"};
+			String[] selections = {"Webseite besuchen","Schließen"};
 			URL url =  getClass().getResource("jwiiload.png");
 
 			Image image1 = Toolkit.getDefaultToolkit().getImage(url);
 
 			ImageIcon image = new ImageIcon(image1);
 
-			int a = JOptionPane.showOptionDialog(this,"JWiiload 1.0\nby Ricky Ayoub (VGMoose)       ","About jWiiload", 0, 0, image, selections, null);
+			int a = JOptionPane.showOptionDialog(this,"JWiiload 1.0 - Deutsche Version\nOriginal von Ricky Ayoub (VGMoose)\nübersetzt von Andreas Bielawski (WiiDatabase.de)       ","Über jWiiload", 0, 0, image, selections, null);
 			if (a==0) goOnline("http://www.rickyayoub.com");
 		}
 		else if (e.getSource() == cbMenuItem)
@@ -273,13 +273,13 @@ public class GUI extends JFrame implements ActionListener, ItemListener
 		}
 		else if (e.getSource() == menuItem)
 		{
-			String s = JOptionPane.showInputDialog("Enter the new port number:",JWiiLoad.port);
+			String s = JOptionPane.showInputDialog("Gebe die neue Port-Nummer an:",JWiiLoad.port);
 			if (s!=null)
 				JWiiLoad.port = Integer.parseInt(s);
 		}
 		else if (e.getSource() == menuItem2)
 		{
-			String s = JOptionPane.showInputDialog("Enter as many arguments as necessary:",JWiiLoad.arguments);
+			String s = JOptionPane.showInputDialog("Gebe so viele Argumente wie nötig an:",JWiiLoad.arguments);
 			if (s!=null)
 			{
 				JWiiLoad.arguments = s;
@@ -292,12 +292,12 @@ public class GUI extends JFrame implements ActionListener, ItemListener
 			JWiiLoad.host = wiiip.getText();
 			
 			try {
-				System.out.println("Greeting Wii...");
+				System.out.println("Begrüße Wii...");
 				JWiiLoad.socket = new Socket(JWiiLoad.host,JWiiLoad.port);
 				
 				JWiiLoad.wiisend();
 			} catch (Exception e1) {
-				System.out.println("No Wii found at " + JWiiLoad.host+"!");
+				System.out.println("Keine Wii gefunden auf " + JWiiLoad.host+"!");
 			}
 			
 		}
